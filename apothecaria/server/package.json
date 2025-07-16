@@ -1,0 +1,24 @@
+{
+  "name": "codeworks-auth-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env --watch ./src/main.js",
+    "swagger": "npx swagger-ui-watcher swagger.json"
+  },
+  "author": "Codeworks",
+  "license": "ISC",
+  "dependencies": {
+    "@bcwdev/auth0provider": "1.1.13",
+    "cors": "2.8.5",
+    "express": "4.21.2",
+    "helmet": "8.0.0",
+    "mongoose": "8.11.0",
+    "socket.io": "4.8.1"
+  },
+  "devDependencies": {
+    "eslint": "9.21.0"
+  }
+}

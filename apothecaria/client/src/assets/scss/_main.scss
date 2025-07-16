@@ -1,0 +1,201 @@
+// Required
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/mixins";
+// Required
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+// Default variable overrides
+@import "./_variables.scss";
+// $theme-colors: map-merge-multiple($blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans, $theme-colors);
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+
+// Merge in all extended colors and weights
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/utilities/api";
+// Optional Bootstrap components here
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+// @import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+// @import "bootstrap/scss/accordion";
+// @import "bootstrap/scss/breadcrumb";
+// @import "bootstrap/scss/pagination";
+// @import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal";
+// @import "bootstrap/scss/tooltip";
+// @import "bootstrap/scss/popover";
+// @import "bootstrap/scss/carousel";
+// @import "bootstrap/scss/spinners";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/placeholders";
+@import "bootstrap/scss/helpers";
+
+
+
+.no-highlight {
+  user-select: none;
+}
+
+.selectable {
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+
+    &:after {
+      opacity: 0.1;
+    }
+  }
+
+  &:after {
+    border-radius: inherit;
+    bottom: 0;
+    color: inherit;
+    content: "";
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+    background-color: currentColor;
+  }
+}
+
+@each $name, $val in $theme-colors {
+  .selectable-#{$name} {
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+
+      &:after {
+        opacity: 0.175;
+      }
+    }
+
+    &:after {
+      border-radius: inherit;
+      bottom: 0;
+      color: inherit;
+      content: "";
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: opacity 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+      background-color: $val;
+    }
+  }
+}
+
+.selectable-glow {
+  cursor: pointer;
+  transition: filter 0.1s linear;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.selectable-scale {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &:hover {
+    transform: scale(1.075);
+  }
+}
+
+.custom-dialog {
+  min-width: 38ch;
+  max-width: 64ch;
+  border: 0;
+  border-radius: var(--bs-border-radius);
+  background-color: var(--bs-body-bg);
+  padding: 2em;
+  box-shadow: var(--bs-box-shadow);
+  animation: blink-toasty .2s ease forwards;
+}
+
+#pop-toast-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  overflow: auto;
+  padding: .5em;
+  pointer-events: none;
+  min-width: 30ch;
+  gap: .25em;
+
+  .toast,
+  .alert {
+    backdrop-filter: blur(20px);
+  }
+}
+
+.toast.show,
+.alert.show {
+  animation: blink-toasty .2s ease forwards;
+}
+
+@keyframes blink-toasty {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+input,
+textarea,
+select {
+  &:not(:placeholder-shown) {
+    &:valid {
+      outline: solid 1px transparentize($success, .65);
+      outline-offset: -2px;
+    }
+
+    &:invalid {
+      outline: solid 1px transparentize($danger, .65);
+      outline-offset: -2px;
+    }
+  }
+}
+
+form:invalid button[type="submit"] {
+  color: var(--bs-btn-disabled-color);
+  pointer-events: none;
+  background-color: var(--bs-btn-disabled-bg);
+  border-color: var(--bs-btn-disabled-border-color);
+  opacity: var(--bs-btn-disabled-opacity);
+}
