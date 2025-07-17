@@ -1,13 +1,13 @@
-<script setup >
-import Example from '@/components/Example.vue';
+<script setup>
+import CardDeck from '@/components/CardDeck.vue';
+
 
 
 </script>
 
 <template>
-  <Example />
+  <CardDeck />
+
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
