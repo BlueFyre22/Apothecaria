@@ -11,9 +11,11 @@ export const AppState = reactive({
   cardDeck52: [],
   /** @type {import('./models/Card.js').Card[]} */
   cardDeck54: [],
+
   /** @type {import('./models/Card.js').Card} */
   card: null,
 
-  flippedCards: []
+  flippedCards: [],
+  lastFlippedCard: {}
 })
 

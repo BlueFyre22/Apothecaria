@@ -7,11 +7,13 @@ const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"
 
 export default class CardDeck {
   constructor(cards = freshDeck()) {
-    cards.unshift(new Card('♦️', '🃏'))
-    cards.push(new Card('♠️', '🃏'))
+    cards.unshift(new Card('🃏', 'Red'))
+    cards.push(new Card('🃏', 'Blk'))
     this.cards = cards
-    logger.log(cards)
+    logger.log("why are these cards and appstate is objects?", cards)
     AppState.cardDeck54 = cards
+    //reset the flipped cards so they dont show on the page
+    AppState.flippedCards = []
   }
 
   get numberOfCards() {
