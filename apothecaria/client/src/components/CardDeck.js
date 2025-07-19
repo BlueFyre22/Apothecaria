@@ -20,6 +20,7 @@ export default class CardDeck {
     return this.cards.length
   }
 
+
   shuffle() {
     for (let i = this.numberOfCards - 1; i > 0; i--) {
       const newIndex = Math.floor(Math.random() * (i + 1))
@@ -39,7 +40,14 @@ class Card {
     this.suit = suit
     this.value = value
   }
+
+  get color() {
+    return this.suit === '♣️' || this.suit === "♠️" || this.value === "Blk" ? 'black' : 'red'
+  }
+
 }
+
+
 
 function freshDeck() {
   return SUITS.flatMap(suit => {

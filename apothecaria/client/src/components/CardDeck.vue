@@ -8,9 +8,11 @@ import { cardDeckService } from '@/services/CardDeckService.js';
 
 async function getCardDeck() {
   const deck = new CardDeck()
-  logger.log("♥️♣️♠️♦️", deck)
+  // logger.log("♥️♣️♠️♦️", deck)
   deck.shuffle()
-  logger.log("shuffled", deck)
+  // logger.log("shuffled", deck)
+  playShuffleSound()
+
 
 }
 const flippedCards = computed(() => AppState.flippedCards)
@@ -20,11 +22,17 @@ onMounted(() => {
   getCardDeck()
 })
 
+function playShuffleSound() {
+  const shuffleSound = new Audio("/src/assets/Sounds/shuffling-cards-1.mp3");
+  shuffleSound.volume = .35; // goes from 0.0 to 1.0 (nothing to as loud as possible)
+  shuffleSound.play()
+}
+
 const shuffledDeck = computed(() => AppState.cardDeck54)
 
 async function flipCard() {
   const returnedValue = await cardDeckService.flipCard()
-  logger.log("returned value 🎴🎴🎴", returnedValue)
+  // logger.log("returned value 🎴🎴🎴", returnedValue)
 
 }
 
@@ -42,9 +50,10 @@ async function flipCard() {
               class="mt-3 border border-success col-md-4 card deck-bg-img text-white">
               <p class="m-0 user-select-none">{{ shuffledDeck.length }}</p>
             </div>
-            <div v-if="flippedCards.length != 0" class="card red mt-3 border border-success col-md-4"
+            <div v-if="flippedCards.length != 0"
+              :class="`card ${lastFlippedCard.color} mt-3 border border-success col-md-4`"
               :data-value="`${lastFlippedCard.value} ${lastFlippedCard.suit}`">
-              <p class="m-0 user-select-none">{{ lastFlippedCard.suit }}</p>
+              <p :class="`m-0 user-select-none`">{{ lastFlippedCard.suit }}</p>
 
             </div>
 
@@ -101,7 +110,7 @@ async function flipCard() {
 .card::after {
   position: absolute;
   content: attr(data-value);
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .card::before {
