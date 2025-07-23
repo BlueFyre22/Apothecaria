@@ -34,7 +34,30 @@ async function flipCard() {
   const returnedValue = await cardDeckService.flipCard()
   // logger.log("returned value 🎴🎴🎴", returnedValue)
 
+
+
+  // remove this code below as its not needed
+  const draggables = document.querySelectorAll('.draggable')
+  console.log("are there dragables?", draggables.length)
+  const containers = document.querySelectorAll('.stackable')
+
+
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', () => {
+      logger.log('drag start')
+    })
+  })
+  //this was a test is all
+
 }
+
+
+
+
+
+
+
+
 
 </script>
 
@@ -50,10 +73,21 @@ async function flipCard() {
               class="mt-3 border border-success col-md-4 card deck-bg-img text-white">
               <p class="m-0 user-select-none">{{ shuffledDeck.length }}</p>
             </div>
-            <div v-if="flippedCards.length != 0"
-              :class="`card ${lastFlippedCard.color} mt-3 border border-success col-md-4`"
+            <div draggable="true" v-if="flippedCards.length != 0" :class="[
+              lastFlippedCard.color,
+              'mt-3',
+              'bg-white',
+              'border',
+              'border-success',
+              'col-md-4',
+              'draggable',
+              (lastFlippedCard.value == 'Blk' || lastFlippedCard.value == 'Red') ? 'joker' : 'card']"
               :data-value="`${lastFlippedCard.value} ${lastFlippedCard.suit}`">
-              <p :class="`m-0 user-select-none`">{{ lastFlippedCard.suit }}</p>
+
+              <p class="user-select-none">{{ lastFlippedCard.suit }}</p>
+
+            </div>
+            <div class="stackable mt-3 border border-info col-md-4 rounded">
 
             </div>
 
@@ -81,6 +115,37 @@ async function flipCard() {
 
 .card.black {
   color: black;
+}
+
+.joker.red {
+  color: red
+}
+
+.joker.black {
+  color: black;
+}
+
+.joker {
+  font-size: 6rem;
+  position: relative;
+  max-height: 20dvh;
+  aspect-ratio: 2/3;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-width: 3px !important;
+  border-radius: 8%;
+
+  @media screen and (min-width: 768px) {
+    max-height: 300px;
+    max-width: 200px;
+  }
+
+  @media screen and (min-width:2785px) {
+    max-height: 400px;
+    max-width: 250px;
+  }
 }
 
 .card {
@@ -124,6 +189,24 @@ async function flipCard() {
   transform: rotate(180deg);
 }
 
+.joker::before,
+.joker::after {
+  position: absolute;
+  content: attr(data-value);
+  font-size: 1.5rem;
+}
+
+.joker::before {
+  top: .5rem;
+  left: .5rem;
+}
+
+.joker::after {
+  bottom: .5rem;
+  right: .5rem;
+  transform: rotate(180deg);
+}
+
 
 
 
@@ -133,23 +216,9 @@ async function flipCard() {
 
 
 
-.flipped-cards {
-  max-height: 20dvh;
-  aspect-ratio: 2/3;
-  padding: 3px;
-  background-size: cover;
-  border-width: 3px !important;
-  border-radius: 8%;
-
-  @media screen and (min-width: 768px) {
-    max-height: 300px;
-    max-width: 200px;
-  }
-
-  @media screen and (min-width:2785px) {
-    max-height: 400px;
-    max-width: 250px;
-  }
-
+.draggable {
+  cursor: move;
 }
+
+.stackable {}
 </style>
