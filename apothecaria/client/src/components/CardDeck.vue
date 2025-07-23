@@ -2,7 +2,7 @@
 
 import { logger } from '@/utils/Logger.js';
 import CardDeck from './CardDeck.js';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { AppState } from '@/AppState.js';
 import { cardDeckService } from '@/services/CardDeckService.js';
 
@@ -33,22 +33,52 @@ const shuffledDeck = computed(() => AppState.cardDeck54)
 async function flipCard() {
   const returnedValue = await cardDeckService.flipCard()
   // logger.log("returned value 🎴🎴🎴", returnedValue)
+}
 
+// Variables to track drag-and-drop state
+const dragIndex = ref(null)
+const dropTargetIndex = ref(null)
 
+// Start dragging a card
+function onDragStart(card, index) {
+  dragIndex.value = index
+  logger.log('Started dragging card at index:', index)
+}
 
-  // remove this code below as its not needed
-  const draggables = document.querySelectorAll('.draggable')
-  console.log("are there dragables?", draggables.length)
-  const containers = document.querySelectorAll('.stackable')
+// While dragging over a card, update the drop target
+function onDragOver(e, index) {
+  e.preventDefault()
+  dropTargetIndex.value = index
+}
 
+// When entering a card area, update the drop target
+function onDragEnter(e, index) {
+  e.preventDefault()
+  dropTargetIndex.value = index
+}
 
-  draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', () => {
-      logger.log('drag start')
-    })
-  })
-  //this was a test is all
+// When leaving a card area, clear the drop target if needed
+function onDragLeave(e, index) {
+  e.preventDefault()
+  // Only clear if leaving the last card
+  if (dropTargetIndex.value === index) dropTargetIndex.value = null
+}
 
+// Drop the dragged card at the new position
+function onDrop(e, dropIndex) {
+  e.preventDefault()
+  logger.log('Dropping card at index:', dropIndex)
+  if (dragIndex.value === null || dragIndex.value === dropIndex) {
+    dragIndex.value = null
+    dropTargetIndex.value = null
+    return
+  }
+  // Move the dragged card to the new position in flippedCards
+  const cards = AppState.flippedCards
+  const [moved] = cards.splice(dragIndex.value, 1)
+  cards.splice(dropIndex, 0, moved)
+  dragIndex.value = null
+  dropTargetIndex.value = null
 }
 
 
@@ -63,34 +93,63 @@ async function flipCard() {
 
 
 <template>
-  <section class="container-fluid bg-grey ">
+  <section class="container-fluid bg-primary ">
     <div class="row ">
       <div class="col-12 d-flex p-0 ms-2 ">
         <div v-if="shuffledDeck.length >= 0" class="col-sm-12 col-md-4 col-lg-5 mt-3">
           <button @click="getCardDeck()">Shuffle Deck!</button>
-          <div class="d-flex gap-3">
+          <div class="d-flex gap-3 align-items-start">
             <div @click="flipCard()" role="button"
-              class="mt-3 border border-success col-md-4 card deck-bg-img text-white">
+              class="mt-3 border border-success card deck-bg-img text-white flex-shrink-0">
               <p class="m-0 user-select-none">{{ shuffledDeck.length }}</p>
             </div>
-            <div draggable="true" v-if="flippedCards.length != 0" :class="[
-              lastFlippedCard.color,
-              'mt-3',
-              'bg-white',
-              'border',
-              'border-success',
-              'col-md-4',
-              'draggable',
-              (lastFlippedCard.value == 'Blk' || lastFlippedCard.value == 'Red') ? 'joker' : 'card']"
-              :data-value="`${lastFlippedCard.value} ${lastFlippedCard.suit}`">
 
-              <p class="user-select-none mt-3">{{ lastFlippedCard.suit }}</p>
+            <!-- Flipped cards area: shows cards in a stacked layout with drag-and-drop -->
+            <div class="flipped-cards-container bg-primary position-relative mt-3" v-if="flippedCards.length > 0">
+              <template v-for="(card, i) in flippedCards.slice().reverse()" :key="card.id || i">
+                <!-- Drop highlight before each card -->
+                <div v-if="dropTargetIndex === (flippedCards.length - 1 - i)" class="drop-highlight" :style="{
+                  left: `${(i % 27) * 30 - 5}px`,
+                  top: `${Math.floor(i / 27) * 120}px`,
+                  zIndex: 1000
+                }">">
+                </div>
 
+                <!-- Card: draggable and positioned with stacking offset -->
+                <div :class="[
+                  card.color,
+                  'bg-white',
+                  'border',
+                  'border-success',
+                  'draggable',
+                  'position-absolute',
+                  (card.value == 'Blk' || card.value == 'Red') ? 'joker' : 'card'
+                ]" :style="{
+                  left: `${(i % 27) * 30}px`,
+                  top: `${Math.floor(i / 27) * 120}px`,
+                  zIndex: i + 1
+                }" :data-value="`${card.value} ${card.suit}`" draggable="true"
+                  @dragstart="onDragStart(card, flippedCards.length - 1 - i)"
+                  @dragover="onDragOver($event, flippedCards.length - 1 - i)"
+                  @dragenter="onDragEnter($event, flippedCards.length - 1 - i)"
+                  @dragleave="onDragLeave($event, flippedCards.length - 1 - i)"
+                  @drop="onDrop($event, flippedCards.length - 1 - i)">
+
+                  <p class="user-select-none mt-3">{{ card.suit }}</p>
+                </div>
+              </template>
+
+              <!-- Highlight at the end if dragging past last card -->
+              <div v-if="dropTargetIndex === flippedCards.length" class="drop-highlight" :style="{
+                left: `${(flippedCards.length % 27) * 30 - 5}px`,
+                top: `${Math.floor(flippedCards.length / 27) * 120}px`,
+                zIndex: 1000
+              }">>">
+              </div>
             </div>
-            <div class="stackable mt-3 border border-info col-md-4 rounded">
 
-            </div>
-
+            <!-- Placeholder to maintain layout when no cards are flipped -->
+            <div v-else class="flipped-cards-container bg-primary position-relative mt-3"></div>
           </div>
 
 
@@ -174,7 +233,7 @@ async function flipCard() {
     max-width: 75px;
     font-size: 4rem;
     aspect-ratio: 2/3;
-    font-size: xx-large;
+    font-size: x-large;
 
   }
 
@@ -236,5 +295,29 @@ async function flipCard() {
   cursor: move;
 }
 
-.stackable {}
+.flipped-cards-container {
+  height: auto;
+  min-height: 300px;
+  /* Increased height to accommodate both rows plus padding */
+  min-width: 820px;
+  /* Minimum width for 27 cards (27 * 30px = 810px + padding) */
+  background-color: #f5f5f5;
+  /* Light grey background */
+  border-radius: 8px;
+  /* Rounded corners */
+  padding: 10px;
+  /* Padding around the cards */
+}
+
+.drop-highlight {
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 180px;
+  background: rgba(0, 123, 255, 0.3);
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  pointer-events: none;
+  transition: left 0.1s;
+}
 </style>
