@@ -84,7 +84,7 @@ async function flipCard() {
               (lastFlippedCard.value == 'Blk' || lastFlippedCard.value == 'Red') ? 'joker' : 'card']"
               :data-value="`${lastFlippedCard.value} ${lastFlippedCard.suit}`">
 
-              <p class="user-select-none">{{ lastFlippedCard.suit }}</p>
+              <p class="user-select-none mt-3">{{ lastFlippedCard.suit }}</p>
 
             </div>
             <div class="stackable mt-3 border border-info col-md-4 rounded">
@@ -126,9 +126,10 @@ async function flipCard() {
 }
 
 .joker {
-  font-size: 6rem;
+  font-size: xx-large;
   position: relative;
-  max-height: 20dvh;
+  max-height: 300px;
+  min-height: 100px;
   aspect-ratio: 2/3;
   background-size: cover;
   justify-content: center;
@@ -137,22 +138,30 @@ async function flipCard() {
   border-width: 3px !important;
   border-radius: 8%;
 
+
   @media screen and (min-width: 768px) {
-    max-height: 300px;
-    max-width: 200px;
+    max-height: 150px;
+    max-width: 75px;
+    font-size: 4rem;
+    aspect-ratio: 2/3;
+    font-size: xx-large;
+
   }
 
   @media screen and (min-width:2785px) {
     max-height: 400px;
     max-width: 250px;
+    font-size: xx-large;
   }
 }
 
 .card {
   position: relative;
-  max-height: 20dvh;
+  max-height: 300px;
+  min-height: 100px;
   aspect-ratio: 2/3;
-  font-size: 4rem;
+  font-size: large;
+
   background-size: cover;
   justify-content: center;
   align-items: center;
@@ -161,13 +170,18 @@ async function flipCard() {
   border-radius: 8%;
 
   @media screen and (min-width: 768px) {
-    max-height: 300px;
-    max-width: 200px;
+    max-height: 150px;
+    max-width: 75px;
+    font-size: 4rem;
+    aspect-ratio: 2/3;
+    font-size: xx-large;
+
   }
 
   @media screen and (min-width:2785px) {
     max-height: 400px;
     max-width: 250px;
+    font-size: xx-large;
   }
 }
 
@@ -175,7 +189,9 @@ async function flipCard() {
 .card::after {
   position: absolute;
   content: attr(data-value);
-  font-size: 1.5rem;
+  font-size: small;
+
+
 }
 
 .card::before {
@@ -193,7 +209,7 @@ async function flipCard() {
 .joker::after {
   position: absolute;
   content: attr(data-value);
-  font-size: 1.5rem;
+  font-size: small;
 }
 
 .joker::before {
