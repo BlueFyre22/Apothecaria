@@ -2,7 +2,7 @@
 FROM --platform=linux/amd64 node:23-slim AS client-builder
 
 # Set the working directory in the client builder container
-WORKDIR /app/apothecaria/client
+WORKDIR /app/client
 
 # Copy the client-side package.json and package-lock.json to the client builder container
 COPY client/package*.json ./
@@ -20,7 +20,7 @@ RUN npm run build
 FROM node:23-slim
 
 # Set the working directory in the server container
-WORKDIR /app/apothecaria/server
+WORKDIR /app/server
 
 # Copy the server-side package.json and package-lock.json to the server container
 COPY server/package*.json ./
