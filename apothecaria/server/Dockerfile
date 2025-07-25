@@ -5,7 +5,7 @@ FROM --platform=linux/amd64 node:23-slim AS client-builder
 WORKDIR /app/client
 
 # Copy the client-side package.json and package-lock.json to the client builder container
-COPY client/package*.json ./
+COPY apothecaria/client/package*.json ./
 
 # Install client application dependencies
 RUN npm install
@@ -23,7 +23,7 @@ FROM node:23-slim
 WORKDIR /app/server
 
 # Copy the server-side package.json and package-lock.json to the server container
-COPY server/package*.json ./
+COPY apothecaria/server/package*.json ./
 
 # Install server application dependencies
 RUN npm install
