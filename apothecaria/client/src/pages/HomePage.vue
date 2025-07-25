@@ -1,5 +1,6 @@
 <script setup>
 import CardDeck from '@/components/CardDeck.vue';
+import CharacterSheet from '@/components/CharacterSheet.vue';
 
 
 
@@ -7,7 +8,7 @@ import CardDeck from '@/components/CardDeck.vue';
 
 <template>
   <CardDeck />
-
+  <CharacterSheet />
 </template>
 
 <style scoped lang="scss"></style>
