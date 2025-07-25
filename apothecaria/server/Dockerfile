@@ -1,8 +1,6 @@
 # Use an official Node.js runtime as the base image for the client build
 FROM --platform=linux/amd64 node:23-slim AS client-builder
 
-CMD ['ls']
-
 # Set the working directory in the client builder container
 WORKDIR /app/client
 
@@ -13,7 +11,7 @@ COPY client/package*.json ./
 RUN npm install
 
 # Copy the client application source code to the client builder container
-COPY client ./
+COPY apothecaria/client ./
 
 # Build the client-side code
 RUN npm run build
@@ -31,7 +29,7 @@ COPY server/package*.json ./
 RUN npm install
 
 # Copy the server application source code to the server container
-COPY server ./
+COPY apothecaria/server ./
 
 # Copy the built client files from the client builder container to the server's www directory
 COPY --from=client-builder /app/client/dist /app/server/www
