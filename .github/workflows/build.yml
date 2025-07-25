@@ -8,7 +8,7 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow from the GitHub Actions tab
 
 env:
-  DOCKERFILE_PATH: ./Dockerfile # 👈 Update this to wherever your Dockerfile is within your repository
+  DOCKERFILE_PATH: ./apothecaria/server/Dockerfile # 👈 Update this to wherever your Dockerfile is within your repository
 
 jobs:
   build-push:
