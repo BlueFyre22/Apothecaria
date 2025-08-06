@@ -20,8 +20,10 @@ watch(theme, () => {
   <nav class="navbar navbar-expand-md bg-codeworks border-bottom border-vue">
     <div class="container gap-2">
       <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
-        <img class="navbar-brand" alt="logo" src="/img/cw-logo.png" height="45" />
-        <b class="fs-5">Vue Starter</b>
+        <img class="navbar-brand" alt="logo"
+          src="C:\Users\bluef\source\self-projects\Apothecaria\apothecaria\client\src\assets\img\skull-candle.webp"
+          height="45" />
+        <b class="fs-5">Home Page</b>
       </RouterLink>
       <!-- collapse button -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-links"

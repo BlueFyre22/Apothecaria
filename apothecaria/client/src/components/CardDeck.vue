@@ -20,6 +20,7 @@ const lastFlippedCard = computed(() => AppState.lastFlippedCard)
 
 onMounted(() => {
   getCardDeck()
+  // findTheNeedle()
 })
 
 function playShuffleSound() {
@@ -85,7 +86,27 @@ function onDrop(e, dropIndex) {
 
 
 
+// const fieldsOfHaystacks = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
 
+// function findTheNeedle() {
+
+//   // this assigns the capital letters A -F to the "fields" or arrays inside the big array
+//   const sortedHaystacks = fieldsOfHaystacks.map((haystacks, index) => {
+//     return { field: String.fromCharCode(65 + index), haystacks: haystacks }
+//   })
+//   logger.log("sortedHaystacks", sortedHaystacks)
+
+//   // this goes and finds the index of the field (array) inside the main array that has the 1 inside of one of its haystacks 
+//   const fieldNeedleIsIn = sortedHaystacks.findIndex(fields => fields.haystacks.includes(1))
+//   logger.log("field Index the needle is in", fieldNeedleIsIn)
+
+//   const foundNeedle = sortedHaystacks[fieldNeedleIsIn]
+//   logger.log("seperate the field the needles is in", foundNeedle)
+
+//   const haystackIndex = foundNeedle.haystacks.indexOf(1)
+//   logger.log("the needle is in:", foundNeedle.field + (haystackIndex + 1))
+
+// }
 
 
 
