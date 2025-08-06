@@ -21,7 +21,7 @@ watch(theme, () => {
     <div class="container gap-2">
       <RouterLink :to="{ name: 'Home' }" class="d-flex align-items-center text-light">
         <img class="navbar-brand" alt="logo"
-          src="C:\Users\bluef\source\self-projects\Apothecaria\apothecaria\client\src\assets\img\skull-candle.webp"
+          src="https://media.istockphoto.com/id/1093691338/photo/carrion-crow-bright-background.jpg?s=612x612&w=0&k=20&c=jnHuhs8TL6PLSKiUNOP6gKB2h_Bx4KFrGFTqVGckhZ8="
           height="45" />
         <b class="fs-5">Home Page</b>
       </RouterLink>
