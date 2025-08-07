@@ -97,12 +97,13 @@ function onDrop(e, dropIndex) {
     <div class="row ">
       <div class="col-12 d-flex p-0 ms-2 ">
         <div v-if="shuffledDeck.length >= 0" class="col-sm-12 col-md-4 col-lg-5 mt-3">
-          <button @click="getCardDeck()">Shuffle Deck!</button>
+
           <div class="d-flex gap-3 align-items-start">
             <div @click="flipCard()" role="button"
               class="mt-3 border border-success card deck-bg-img text-white flex-shrink-0">
               <p class="m-0 user-select-none">{{ shuffledDeck.length }}</p>
             </div>
+
 
             <!-- Flipped cards area: shows cards in a stacked layout with drag-and-drop -->
             <div class="flipped-cards-container bg-primary position-relative mt-3" v-if="flippedCards.length > 0">
@@ -154,6 +155,10 @@ function onDrop(e, dropIndex) {
 
 
         </div>
+      </div>
+      <div class="d-flex justify-content-center mb-3">
+
+        <button @click="getCardDeck()" class="btn btn-warning fs-3">Shuffle Deck!</button>
       </div>
 
     </div>
