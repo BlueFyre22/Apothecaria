@@ -5,7 +5,7 @@
 
 
 <template>
-  <section class="container-fluid bg-info ">
+  <section class="container-fluid bg-indigo text-light">
     <div class="row gap-1 justify-content-around">
 
 
@@ -13,6 +13,7 @@
         <div class="col">
           <h1 class="text-center text-dark rounded fw-bold display-3 mb-0">Apothecaria</h1>
           <p class="text-center mt-0 fs-5">Character Sheet</p>
+          <hr>
         </div>
         <!-- SECTION Character Sheet -->
         <div class="col d-flex flex-row align-items-start">
@@ -49,26 +50,28 @@
           </div>
           <div class="col-md-6">
             <div class="d-flex flex-column">
-              <div class="position-relative border-bottom">
+              <div class=" border-bottom">
 
-                <span class="bottom-left ">Mortar & Pestal</span>
+                <span class="">Mortar & Pestal</span>
               </div>
-              <div class="position-relative border-bottom">
+              <div class=" border-bottom">
                 <span>Alembic</span>
               </div>
-              <div class="position-relative border-bottom">
+              <div class=" border-bottom">
                 <span>Cauldron</span>
               </div>
-              <div class="position-relative border-bottom"></div>
+              <div class="height-set border-bottom">
+
+              </div>
             </div>
           </div>
 
           <div class="ps-3 mb-3 col-md-6">
             <div class="d-flex flex-column ">
-              <div class="position-relative border-bottom"></div>
-              <div class="position-relative border-bottom"></div>
-              <div class="position-relative border-bottom"></div>
-              <div class="position-relative border-bottom"></div>
+              <div class="height-set border-bottom"></div>
+              <div class="height-set border-bottom"></div>
+              <div class="height-set border-bottom"></div>
+              <div class="height-set border-bottom"></div>
             </div>
           </div>
         </div>
@@ -80,7 +83,54 @@
         <div class="col">
           <h1 class="text-center text-dark rounded fw-bold display-3 mb-0">Apothecaria</h1>
           <p class="text-center mt-0 fs-5">Character Sheet</p>
+          <hr>
         </div>
+        <div class="d-flex">
+
+          <div class="col-md-7">
+            <h4 class="text-start">Tools Via Events</h4>
+            <div class="d-flex flex-column ">
+              <div class="height-set border-bottom"></div>
+              <div class="height-set border-bottom"></div>
+              <div class="height-set border-bottom"></div>
+              <div class="height-set border-bottom"></div>
+            </div>
+            <div class="mt-3">
+              <h4>Upgrades</h4>
+              <div class="d-flex flex-column ">
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+                <div class="height-set border-bottom"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-5">
+            <h4 class="text-center">Weeks:</h4>
+            <div v-for="x in 13" :key="x" class="mb-1 d-flex gap-1 justify-content-center">
+              <input type="checkbox" class="border bg-green">
+              <input type="checkbox" class="border bg-yellow">
+              <input type="checkbox" class="border bg-red">
+              <input type="checkbox" class="border bg-info">
+            </div>
+            <div class="col align-items-center d-flex justify-content-center">
+              <div class="border bg-light text-dark col-md-7">
+
+                <h4 class="text-center">Festival</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
 
@@ -99,11 +149,41 @@
 
 .bottom-left {
   position: absolute;
-  left: 0;
+  left: 10;
   bottom: 0;
+}
+
+.height-set {
+  height: 1.5rem;
 }
 
 .position-relative {
   height: 1.5rem;
+}
+
+
+
+// this is to create the custom checkboxes so i can change the background color
+input {
+  appearance: none;
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid;
+  line-height: 1;
+  background: #aaa;
+}
+
+input[type="checkbox"]::before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  white-space: pre;
+  content: " ";
+}
+
+input[type="checkbox"]:checked::before {
+  content: "\2713";
 }
 </style>
