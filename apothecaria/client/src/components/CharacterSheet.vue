@@ -184,6 +184,6 @@ input[type="checkbox"]::before {
 }
 
 input[type="checkbox"]:checked::before {
-  content: "\2713";
+  content: "\2721";
 }
 </style>
