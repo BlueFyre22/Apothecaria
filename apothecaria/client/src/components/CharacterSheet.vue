@@ -167,8 +167,8 @@
 input {
   appearance: none;
   position: relative;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid;
   line-height: 1;
   background: #aaa;
@@ -183,6 +183,7 @@ input[type="checkbox"]::before {
   content: " ";
 }
 
+// the content is the Unicode Character code. I picked a unique one, 2713 is for a regular check if you need to change it back
 input[type="checkbox"]:checked::before {
   content: "\2721";
 }
