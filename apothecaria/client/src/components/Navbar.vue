@@ -41,11 +41,11 @@ watch(theme, () => {
         </ul>
         <!-- LOGIN COMPONENT HERE -->
         <div class="ms-auto">
-          <button class="btn text-light" @click="toggleTheme"
+          <!-- <button class="btn text-light" @click="toggleTheme"
             :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
             <i v-if="theme == 'dark'" class="mdi mdi-weather-sunny"></i>
             <i v-if="theme == 'light'" class="mdi mdi-weather-night"></i>
-          </button>
+          </button> -->
         </div>
         <Login />
       </div>

@@ -104,7 +104,6 @@ function onDrop(e, dropIndex) {
               <p class="m-0 user-select-none">{{ shuffledDeck.length }}</p>
             </div>
 
-
             <!-- Flipped cards area: shows cards in a stacked layout with drag-and-drop -->
             <div class="flipped-cards-container bg-primary position-relative mt-3" v-if="flippedCards.length > 0">
               <template v-for="(card, i) in flippedCards.slice().reverse()" :key="card.id || i">
@@ -157,7 +156,6 @@ function onDrop(e, dropIndex) {
         </div>
       </div>
       <div class="d-flex justify-content-center mb-3">
-
         <button @click="getCardDeck()" class="btn btn-warning fs-3">Shuffle Deck!</button>
       </div>
 
@@ -287,14 +285,9 @@ function onDrop(e, dropIndex) {
   transform: rotate(180deg);
 }
 
-
-
-
 .deck-bg-img {
   background-image: url("/src/assets/img/woods\ image.jpg");
 }
-
-
 
 .draggable {
   cursor: move;
