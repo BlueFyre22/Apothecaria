@@ -32,10 +32,10 @@ import CharacterSheet from '@/components/CharacterSheet.vue';
 
 <style scoped lang="scss">
 .bg-image {
-  background-image: url('https://images.unsplash.com/photo-1707934956917-b00c2ae4596c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('https://images.unsplash.com/photo-1622209470866-3692e27d665c?q=80&w=1213&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   object-fit: contain;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
 }
 </style>

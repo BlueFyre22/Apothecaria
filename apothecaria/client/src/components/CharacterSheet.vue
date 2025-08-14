@@ -24,7 +24,7 @@
           </div>
           <div class="col-md-4 d-flex flex-column align-items-start">
             <span><i class="text-red mdi mdi-account-heart-outline"></i> Reputation: 0</span>
-            <span class=""><i class=" mdi mdi-purse"></i>Silver: 0</span>
+            <span class=""><i class=" mdi mdi-purse"></i> Silver: 0</span>
 
           </div>
         </div>
