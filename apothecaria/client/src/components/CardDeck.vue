@@ -96,7 +96,7 @@ function onDrop(e, dropIndex) {
   <section class="container-fluid ">
     <div class="row ">
       <div class="col-12 d-flex p-0 m-0 ">
-        <div v-if="shuffledDeck.length >= 0" class="col-sm-12 col-md-4 col-lg-5 mt-3">
+        <div v-if="shuffledDeck" class="col-sm-12 col-md-4 col-lg-5 mt-3">
 
           <div class="d-flex gap-3 align-items-start">
             <div @click="flipCard()" role="button"
@@ -155,8 +155,8 @@ function onDrop(e, dropIndex) {
 
         </div>
       </div>
-      <div class="d-flex justify-content-center mb-3">
-        <button @click="getCardDeck()" class="btn btn-warning fs-3">Shuffle Deck!</button>
+      <div class="d-flex justify-content-start mb-3">
+        <button @click="getCardDeck()" class="btn btn-info fs-3">Shuffle Deck!</button>
       </div>
 
     </div>

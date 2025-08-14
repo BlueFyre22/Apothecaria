@@ -1,6 +1,7 @@
 <script setup>
 import CardDeck from '@/components/CardDeck.vue';
 import CharacterSheet from '@/components/CharacterSheet.vue';
+import WeeklyLog from '@/components/WeeklyLog.vue';
 
 
 
@@ -9,13 +10,13 @@ import CharacterSheet from '@/components/CharacterSheet.vue';
 <template>
   <section class="container-fluid">
     <div class="row">
-      <div class="col-12 p-0 bg-image">
+      <div class="col-12 p-0 bg-image d-flex">
         <div class="col-md-6 m-0">
           <CardDeck />
 
         </div>
         <div class="col-md-6">
-
+          <WeeklyLog />
         </div>
 
       </div>
