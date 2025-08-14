@@ -93,9 +93,9 @@ function onDrop(e, dropIndex) {
 
 
 <template>
-  <section class="container-fluid bg-primary ">
+  <section class="container-fluid ">
     <div class="row ">
-      <div class="col-12 d-flex p-0 ms-2 ">
+      <div class="col-12 d-flex p-0 m-0 ">
         <div v-if="shuffledDeck.length >= 0" class="col-sm-12 col-md-4 col-lg-5 mt-3">
 
           <div class="d-flex gap-3 align-items-start">
@@ -105,12 +105,12 @@ function onDrop(e, dropIndex) {
             </div>
 
             <!-- Flipped cards area: shows cards in a stacked layout with drag-and-drop -->
-            <div class="flipped-cards-container bg-primary position-relative mt-3" v-if="flippedCards.length > 0">
+            <div class="flipped-cards-container position-relative mt-3" v-if="flippedCards.length > 0">
               <template v-for="(card, i) in flippedCards.slice().reverse()" :key="card.id || i">
                 <!-- Drop highlight before each card -->
                 <div v-if="dropTargetIndex === (flippedCards.length - 1 - i)" class="drop-highlight" :style="{
-                  left: `${(i % 27) * 30 - 5}px`,
-                  top: `${Math.floor(i / 27) * 120}px`,
+                  left: `${(i % 18) * 30 - 5}px`,
+                  top: `${Math.floor(i / 18) * 120}px`,
                   zIndex: 1000
                 }">">
                 </div>
@@ -125,8 +125,8 @@ function onDrop(e, dropIndex) {
                   'position-absolute',
                   (card.value == 'Blk' || card.value == 'Red') ? 'joker' : 'card'
                 ]" :style="{
-                  left: `${(i % 27) * 30}px`,
-                  top: `${Math.floor(i / 27) * 120}px`,
+                  left: `${(i % 18) * 30}px`,
+                  top: `${Math.floor(i / 18) * 120}px`,
                   zIndex: i + 1
                 }" :data-value="`${card.value} ${card.suit}`" draggable="true"
                   @dragstart="onDragStart(card, flippedCards.length - 1 - i)"
@@ -141,15 +141,15 @@ function onDrop(e, dropIndex) {
 
               <!-- Highlight at the end if dragging past last card -->
               <div v-if="dropTargetIndex === flippedCards.length" class="drop-highlight" :style="{
-                left: `${(flippedCards.length % 27) * 30 - 5}px`,
-                top: `${Math.floor(flippedCards.length / 27) * 120}px`,
+                left: `${(flippedCards.length % 18) * 30 - 5}px`,
+                top: `${Math.floor(flippedCards.length / 18) * 120}px`,
                 zIndex: 1000
               }">>">
               </div>
             </div>
 
             <!-- Placeholder to maintain layout when no cards are flipped -->
-            <div v-else class="flipped-cards-container bg-primary position-relative mt-3"></div>
+            <div v-else class="flipped-cards-container position-relative mt-3"></div>
           </div>
 
 
@@ -295,11 +295,11 @@ function onDrop(e, dropIndex) {
 
 .flipped-cards-container {
   height: auto;
-  min-height: 300px;
+  min-height: 360px;
   /* Increased height to accommodate both rows plus padding */
-  min-width: 820px;
+  min-width: 540px;
   /* Minimum width for 27 cards (27 * 30px = 810px + padding) */
-  background-color: #f5f5f5;
+  // background-color: #f5f5f52d;
   /* Light grey background */
   border-radius: 8px;
   /* Rounded corners */
